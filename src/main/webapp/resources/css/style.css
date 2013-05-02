@@ -1,0 +1,98 @@
+@CHARSET "UTF-8";
+body{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	vertical-align: top;
+	width: 955px;
+	height: 100%;
+	font-size:13px;
+	font-family: Lucida Grande, Lucida Sans Unicode, Helvetica, Arial, Verdana, sans-serif; 	
+}
+#header{
+	background-image:url( 	
+https://s3-eu-west-1.amazonaws.com/sliketehtnic/resources/images/no_flicker.jpg);
+	background-repeat: repeat-x;
+}
+.menu {  
+     list-style: none;  
+     position: relative;  
+     margin: 0;  
+     padding: 0; 
+
+ }
+ 
+ .menu li{
+ 	display: block;
+ 	overflow: hidden;
+ 	padding: 0;
+ 	float: left;
+	padding-right:40px;
+ 	height: 40px;
+ 	padding-top: 7px;
+ 	font-size: 18px;
+ 	font-family: Verdana, Arial, Helvetica, sans-serif;
+ 	color:#454544;
+
+ }  
+ 
+ .menu a{
+ 	display: block;
+ 	height: 40px;
+ 	outline: none;
+ 	text-decoration:none;
+ 	color:#454544;
+ 	cursor: pointer;
+ }
+ 
+ #iweight{
+ 	padding-left:20px;
+ 	font-weight: bold;
+ }
+ 
+ #user{
+ 	position:absolute;
+ 	right:-20px;
+
+ }
+ #user img{ cursor: pointer;}
+ #user label{
+ 	position: relative;
+ 	top:-7px;
+ }
+ 
+ #content{
+ 	clear: both;
+ 	margin-top:30px;
+ 	margin-left:18px;
+ 	min-height: 380px;
+ }
+ #footer label{
+ 	padding-left:20px;
+ 	font-size: 11px;
+ 	font-weight:bold;
+ 	color:#A6A5A4;  
+ }
+ #footer hr{
+ 	color:#A6A5A4;
+ }
+ 
+ /*********************splosni elementi *************/
+ h1 {
+ 	color:#A6A5A4;
+ }
+ h2 {
+ 	color:#A6A5A4;
+ }
+ h3 {
+ 	color:#A6A5A4;
+ }
+ a {
+ 	color:#A6A5A4;
+ 	cursor: pointer;
+ }
+ p {
+ 	color:#454544;
+ 	font-family:  Verdana, sans-serif; 
+ 	font-weight: bold;
+ }
