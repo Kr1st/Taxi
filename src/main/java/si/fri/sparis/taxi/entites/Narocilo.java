@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,6 +37,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Narocilo.findByStatus", query = "SELECT n FROM Narocilo n WHERE n.status = :status"),
     @NamedQuery(name = "Narocilo.findByCena", query = "SELECT n FROM Narocilo n WHERE n.cena = :cena")})
 public class Narocilo implements Serializable {
+    @Size(max = 50)
+    @Column(name = "LOKACIJA")
+    private String lokacija;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -145,6 +150,14 @@ public class Narocilo implements Serializable {
     @Override
     public String toString() {
         return "si.fri.sparis.taxi.entites.Narocilo[ idnarocilo=" + idnarocilo + " ]";
+    }
+
+    public String getLokacija() {
+        return lokacija;
+    }
+
+    public void setLokacija(String lokacija) {
+        this.lokacija = lokacija;
     }
     
 }
