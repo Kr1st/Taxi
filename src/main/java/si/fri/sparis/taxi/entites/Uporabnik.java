@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -64,7 +63,7 @@ public class Uporabnik implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "PRIIMEK")
     private String priimek;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -80,6 +79,8 @@ public class Uporabnik implements Serializable {
     @Column(name = "ZADNJAPRIJAVA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date zadnjaprijava;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduporabnik")
+    private List<Voznik> voznikList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "iduporabnik")
     private List<Narocilo> narociloList;
 
@@ -154,6 +155,16 @@ public class Uporabnik implements Serializable {
 
     public void setZadnjaprijava(Date zadnjaprijava) {
         this.zadnjaprijava = zadnjaprijava;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public List<Voznik> getVoznikList() {
+        return voznikList;
+    }
+
+    public void setVoznikList(List<Voznik> voznikList) {
+        this.voznikList = voznikList;
     }
 
     @XmlTransient

@@ -34,13 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Narocilo.findAll", query = "SELECT n FROM Narocilo n"),
     @NamedQuery(name = "Narocilo.findByIdnarocilo", query = "SELECT n FROM Narocilo n WHERE n.idnarocilo = :idnarocilo"),
     @NamedQuery(name = "Narocilo.findByDatum", query = "SELECT n FROM Narocilo n WHERE n.datum = :datum"),
+    @NamedQuery(name = "Narocilo.findByLokacija", query = "SELECT n FROM Narocilo n WHERE n.lokacija = :lokacija"),
     @NamedQuery(name = "Narocilo.findByStatus", query = "SELECT n FROM Narocilo n WHERE n.status = :status"),
     @NamedQuery(name = "Narocilo.findByCena", query = "SELECT n FROM Narocilo n WHERE n.cena = :cena")})
 public class Narocilo implements Serializable {
-    @Size(max = 50)
-    @Column(name = "LOKACIJA")
-    private String lokacija;
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +49,11 @@ public class Narocilo implements Serializable {
     @Column(name = "DATUM")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datum;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "LOKACIJA")
+    private String lokacija;
     @Basic(optional = false)
     @NotNull
     @Column(name = "STATUS")
@@ -73,9 +75,10 @@ public class Narocilo implements Serializable {
         this.idnarocilo = idnarocilo;
     }
 
-    public Narocilo(Integer idnarocilo, Date datum, int status) {
+    public Narocilo(Integer idnarocilo, Date datum, String lokacija, int status) {
         this.idnarocilo = idnarocilo;
         this.datum = datum;
+        this.lokacija = lokacija;
         this.status = status;
     }
 
@@ -93,6 +96,14 @@ public class Narocilo implements Serializable {
 
     public void setDatum(Date datum) {
         this.datum = datum;
+    }
+
+    public String getLokacija() {
+        return lokacija;
+    }
+
+    public void setLokacija(String lokacija) {
+        this.lokacija = lokacija;
     }
 
     public int getStatus() {
@@ -150,14 +161,6 @@ public class Narocilo implements Serializable {
     @Override
     public String toString() {
         return "si.fri.sparis.taxi.entites.Narocilo[ idnarocilo=" + idnarocilo + " ]";
-    }
-
-    public String getLokacija() {
-        return lokacija;
-    }
-
-    public void setLokacija(String lokacija) {
-        this.lokacija = lokacija;
     }
     
 }

@@ -29,6 +29,21 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
         super(Uporabnik.class);
     }
 
+    public boolean register(Uporabnik uporabnik){
+         List<Uporabnik> uporabnikResultList =
+                em.createNamedQuery("Uporabnik.findByEmail").
+                setParameter("email", uporabnik.getEmail()).getResultList();
+    
+         if(uporabnikResultList.size() > 0)
+             return false;
+         
+         this.create(uporabnik);
+         
+         return true;
+         
+    }
+    
+    
     public Uporabnik login(String email, String geslo) {
         List<Uporabnik> uporabnikResultList =
                 em.createNamedQuery("Uporabnik.findByEmail").
@@ -46,7 +61,8 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
         } else {
             return null;
         }
-
-
     }
+    
+    
+    
 }
