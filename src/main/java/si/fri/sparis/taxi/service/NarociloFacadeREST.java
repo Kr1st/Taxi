@@ -23,7 +23,7 @@ import si.fri.sparis.taxi.entites.Narocilo;
  * @author Kristian
  */
 @Stateless
-@Path("si.fri.sparis.taxi.entites.narocilo")
+@Path("narocilo")
 public class NarociloFacadeREST extends AbstractFacade<Narocilo> {
     @PersistenceContext(unitName = "si.fri.sparis_Taxi_war_1.0-SNAPSHOTPU")
     private EntityManager em;

@@ -13,7 +13,7 @@
             <h:form id="form">  
                 <p:panel header="Registracija" id="panel">  
                     <h:panelGrid columns="3" cellpadding="10" id="registerGrid">  
-
+                        
                         <h:outputLabel value="Ime: *" for="ime" />  
                         <p:inputText id="ime" value="#{registerBean.ime}" required="true"
                                      requiredMessage="Potrebno je vnesti ime!"
@@ -57,6 +57,7 @@
 
                     </h:panelGrid>
                     <p:commandButton value="Ustvari" action="#{registerBean.register}" update="registerGrid" />
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 </p:panel>  
                 
                   
