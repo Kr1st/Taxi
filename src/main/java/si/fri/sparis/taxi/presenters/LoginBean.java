@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import si.fri.sparis.taxi.entites.Uporabnik;
+import si.fri.sparis.taxi.facade.UporabnikFacade;
 
 /**
  *
@@ -26,8 +27,9 @@ public class LoginBean {
     @Inject
     private UserBean user;
     
-    @PersistenceContext(unitName = "si.fri.sparis_Taxi_war_1.0-SNAPSHOTPU")
-    private EntityManager em;
+    @Inject 
+    private UporabnikFacade uf;
+    
 
     /**
      * Creates a new instance of LoginBean
@@ -52,13 +54,9 @@ public class LoginBean {
     }
 
     public String login() {
-        List<Uporabnik> uporabnikResultList =
-                em.createNamedQuery("Uporabnik.findByEmail").
-                setParameter("email", this.email).getResultList();
-
-        Uporabnik uporabnik;
         
-        if (!uporabnikResultList.isEmpty() && (uporabnik = uporabnikResultList.get(0)).getGeslo().equals(this.geslo)) {
+        Uporabnik uporabnik = uf.login(this.email, this.geslo);
+        if (uporabnik != null) {
             user.setUporabnik(uporabnik);
             user.setIsLogged(true);
             System.out.println("prijava je uspela!!!");
