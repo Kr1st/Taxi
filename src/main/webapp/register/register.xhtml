@@ -9,11 +9,12 @@
     <h:head />
     <ui:composition template="/template/template.xhtml">
         <ui:define name="content">
+            
             <h:form id="form">  
-                <p:panel header="Ustvari stranko" toggleable="true" id="panel">  
-                    <h:panelGrid columns="3" cellpadding="10">  
+                <p:panel header="Registracija" id="panel">  
+                    <h:panelGrid columns="3" cellpadding="10" id="registerGrid">  
 
-                        <h:outputLabel value="Ime:" for="ime" />  
+                        <h:outputLabel value="Ime: *" for="ime" />  
                         <p:inputText id="ime" value="#{registerBean.ime}" required="true"
                                      requiredMessage="Potrebno je vnesti ime!"
                                      validatorMessage="Ime se mora začeti z veliko začetnico!">  
@@ -21,10 +22,10 @@
                             <p:ajax update="msgIme" event="keyup" />  
                         </p:inputText>  
                         <p:message for="ime" id="msgIme" />
-                        
 
 
-                        <h:outputLabel value="Priimek:" for="priimek" />  
+
+                        <h:outputLabel value="Priimek: *" for="priimek" />  
                         <p:inputText id="priimek" value="#{registerBean.priimek}" required="true" 
                                      requiredMessage="Potrebno je vnesti priimek!"
                                      validatorMessage="Priimek se mora začeti z veliko začetnico!">
@@ -34,50 +35,31 @@
                         <p:message for="priimek" id="msgPriimek" />
 
 
-                        <h:outputLabel value="Email:" for="email" />  
+                        <h:outputLabel value="Email: *" for="email" />  
                         <p:inputText id="email" value="#{registerBean.email}" required="true"
                                      requiredMessage="Potrebno je vnesti email!"
                                      validatorMessage="Napačen format emaila!">  
-                            <f:validateRegex pattern="\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b" />
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                             <p:ajax update="msgEmail" event="keyup" />  
                         </p:inputText>  
                         <p:message for="email" id="msgEmail"/>
 
-
-                        <h:outputLabel value="Država:" for="acDrzava" />  
-                        <p:autoComplete id="acDrzava" value="#{addCustomerBean.drzava}"   
-                                        completeMethod="#{addCustomerBean.drzavaComplete}" required="true" 
-                                        requiredMessage="Potrebno je vnesti državo"
-                                        validatorMessage="Napačen format države">
-                            <f:validateRegex pattern="^[a-zA-Z ]*\z" /> 
-                            <p:ajax update="msgDrzava" event="keyup" />
-                        </p:autoComplete>
-                        <p:message for="acDrzava" id="msgDrzava"/>
-
-
-                        <h:outputLabel value="Podjetje:" for="podjetje" />  
-                        <p:inputText id="podjetje" value="#{addCustomerBean.podjetje}" required="true"
-                                     requiredMessage="Potrebno je vnesti podjetje"
-                                     validatorMessage="Ime podjetja mora biti dolgo vsaj 2 znaka">  
-                            <f:validateLength minimum="2" />  
-                            <p:ajax update="msgPodjetje" event="keyup" />  
-                        </p:inputText>  
-                        <p:message for="podjetje" id="msgPodjetje"/>
-
-                        <h:outputLabel value="Pravice:" for="pravice" />  
-                        <p:selectOneMenu id="pravice" value="#{addCustomerBean.pravice}">  
-                            <f:selectItem itemLabel="Navadne" itemValue="0" />  
-                            <f:selectItem itemLabel="Administratorske" itemValue="1" />
-                        </p:selectOneMenu>
-                        <p:message for="pravice" id="msgPravice" display="icon"/>  
+                            
+                        <h:outputLabel for="pwd1" value="Geslo 1: *" />  
+                        <p:password id="pwd1" value="#{registerBean.geslo1}" match="pwd2" label="Geslo 1" required="true" feedback="true" promptLabel="Vpišite geslo" weakLabel="Šibko"  
+                        goodLabel="Dobro" strongLabel="Močno"/>  
+                        
+                        <p:message for="pwd1"  id="msgPwd1" showDetail="true" />
+                        
+                        <h:outputLabel for="pwd2" value="Geslo 2: *" />  
+                        <p:password id="pwd2" value="#{registerBean.geslo2}" label="Geslo 2" required="true"/> 
 
 
-                    </h:panelGrid>  
+                    </h:panelGrid>
+                    <p:commandButton value="Ustvari" action="#{registerBean.register}" update="registerGrid" />
                 </p:panel>  
-                <p:commandButton value="Ustvari" action="#{addCustomerBean.create}" ajax="false" />
-                <p:commandButton value="Nazaj" action="#{addCustomerBean.back}" ajax="false" immediate="true"/>   
-
-
+                
+                  
             </h:form>  
 
         </ui:define>

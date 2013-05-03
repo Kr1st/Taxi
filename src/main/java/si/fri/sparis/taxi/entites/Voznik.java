@@ -13,11 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,8 +34,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "Voznik.findAll", query = "SELECT v FROM Voznik v"),
     @NamedQuery(name = "Voznik.findByIdvoznik", query = "SELECT v FROM Voznik v WHERE v.idvoznik = :idvoznik"),
-    @NamedQuery(name = "Voznik.findByIme", query = "SELECT v FROM Voznik v WHERE v.ime = :ime"),
-    @NamedQuery(name = "Voznik.findByPriimek", query = "SELECT v FROM Voznik v WHERE v.priimek = :priimek")})
+    @NamedQuery(name = "Voznik.findByVozilo", query = "SELECT v FROM Voznik v WHERE v.vozilo = :vozilo")})
 public class Voznik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,16 +42,12 @@ public class Voznik implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDVOZNIK")
     private Integer idvoznik;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "IME")
-    private String ime;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "PRIIMEK")
-    private String priimek;
+    @Size(max = 45)
+    @Column(name = "VOZILO")
+    private String vozilo;
+    @JoinColumn(name = "IDUPORABNIK", referencedColumnName = "IDUPORABNIK")
+    @ManyToOne(optional = false)
+    private Uporabnik iduporabnik;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idvoznik")
     private List<Narocilo> narociloList;
 
@@ -62,12 +58,6 @@ public class Voznik implements Serializable {
         this.idvoznik = idvoznik;
     }
 
-    public Voznik(Integer idvoznik, String ime, String priimek) {
-        this.idvoznik = idvoznik;
-        this.ime = ime;
-        this.priimek = priimek;
-    }
-
     public Integer getIdvoznik() {
         return idvoznik;
     }
@@ -76,20 +66,20 @@ public class Voznik implements Serializable {
         this.idvoznik = idvoznik;
     }
 
-    public String getIme() {
-        return ime;
+    public String getVozilo() {
+        return vozilo;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setVozilo(String vozilo) {
+        this.vozilo = vozilo;
     }
 
-    public String getPriimek() {
-        return priimek;
+    public Uporabnik getIduporabnik() {
+        return iduporabnik;
     }
 
-    public void setPriimek(String priimek) {
-        this.priimek = priimek;
+    public void setIduporabnik(Uporabnik iduporabnik) {
+        this.iduporabnik = iduporabnik;
     }
 
     @XmlTransient

@@ -23,7 +23,7 @@ import si.fri.sparis.taxi.entites.Voznik;
  * @author Kristian
  */
 @Stateless
-@Path("voznik")
+@Path("si.fri.sparis.taxi.entites.voznik")
 public class VoznikFacadeREST extends AbstractFacade<Voznik> {
     @PersistenceContext(unitName = "si.fri.sparis_Taxi_war_1.0-SNAPSHOTPU")
     private EntityManager em;
