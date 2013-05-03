@@ -16,7 +16,8 @@
     	<ul class="menu">  
 		    <li id="itaxi"><h:link value="iTaxi" outcome="/index.xhtml" /></li>
                     <ui:fragment rendered="#{userBean.isLogged}"><li id="user"><h:outputLabel value="#{userBean.uporabnik.ime} #{userBean.uporabnik.priimek}" />
-                        <h:graphicImage value="/resources/images/logOuticon.png"  height="25px" width="25px"/>
+                        <!--<img src="resources/images/logOuticon.png" height="25px" width="25px" />-->
+                        <h:graphicImage  library="images" name="logOuticon.PNG" height="25px" width="25px" />
  			</li></ui:fragment>
                     <ui:fragment rendered="#{!userBean.isLogged}"><li><h:link value="Log in" outcome="/login/login.xhtml" /> </li> </ui:fragment>
 		</ul>  
