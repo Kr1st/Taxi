@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/template/template.xhtml">
+  
+	<ui:define name="content">
+	    <p>
+                <h:outputLabel value="Prijavljeni ste kot #{userBean.uporabnik.ime} #{userBean.uporabnik.priimek}." rendered="#{userBean.isLogged}" />
+                <h:graphicImage name="images/iTaxi.png" rendered="#{!userBean.isLogged}"/>
+		</p>
+	</ui:define>
+
+</ui:composition>
+</html>

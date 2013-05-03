@@ -7,15 +7,15 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="/template/template.xhtml">
-
+        
 	<ui:define name="content">
-            <h:dataTable var="uporabnik" value="#{uporabnikFascade.findAll}" >
+            <h:dataTable var="uporabnik" value="#{uporabnikCRUD.uporabniki}" >
                 <h:column>
                     <f:facet name="header">id</f:facet>
                     #{uporabnik.IDUPORABNIK}
                 </h:column>
             </h:dataTable>
 	</ui:define>
-
+        
 </ui:composition>
 </html>
