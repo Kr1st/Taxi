@@ -10,8 +10,7 @@ body{
 	font-family: Lucida Grande, Lucida Sans Unicode, Helvetica, Arial, Verdana, sans-serif; 	
 }
 #header{
-	background-image:url( 	
-https://s3-eu-west-1.amazonaws.com/sliketehtnic/resources/images/no_flicker.jpg);
+	background-image:url(./../images/no_flicker.jpg);
 	background-repeat: repeat-x;
 }
 .menu {  

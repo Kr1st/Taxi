@@ -1,46 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-  <title><ui:insert name="title">iTaxi</ui:insert></title>
-  <h:outputStylesheet name="css/style.css" />
-  
-</h:head>
+    <h:head>
+        <title><ui:insert name="title">iTaxi</ui:insert></title>
+        <h:outputStylesheet name="css/style.css" />
 
-<body>
+    </h:head>
 
-<div id="header">
-    <ui:insert name="header">
-    	<ul class="menu">  
-		    <li id="itaxi"><h:link value="iTaxi" outcome="/index.xhtml" /></li>
-                    <ui:fragment rendered="#{userBean.isLogged}"><li id="user"><h:outputLabel value="#{userBean.uporabnik.ime} #{userBean.uporabnik.priimek}" />
-                        <h:graphicImage value="/resources/images/logOuticon.png"  height="25px" width="25px"/>
- 			</li></ui:fragment>
-                    <ui:fragment rendered="#{!userBean.isLogged}"><li><h:link value="Log in" outcome="/login/login.xhtml" /> </li> </ui:fragment>
-		</ul>  
-    	
-    </ui:insert>
-<br />
-<br />
-<br />
-</div>
+    <body>
+
+        <div id="header">
+            <ui:insert name="header">
+                <h:form>
+                    <ul class="menu">  
+                        <li id="itaxi"><h:link value="iTaxi" outcome="/index.xhtml" /></li>
+                        <ui:fragment rendered="#{userBean.isLogged}"><h:commandLink action ="#{userBean.logout}"><li id="user"><h:outputLabel value="#{userBean.uporabnik.ime} #{userBean.uporabnik.priimek} " />
+                                <h:graphicImage name="images/logOuticon.png"  height="25px" width="25px" />
+                            </li></h:commandLink></ui:fragment>
+                        <ui:fragment rendered="#{!userBean.isLogged}"><li><h:link value="Log in" outcome="/login/login.xhtml" /> </li> </ui:fragment>
+                    </ul>
+                </h:form>
+
+            </ui:insert>
+            <br />
+            <br />
+            <br />
+        </div>
 
 
-<div id="content">
-  <ui:insert name="content">
-    	Niste prijavljeni!
-  </ui:insert>
-</div>
+        <div id="content">
+            <ui:insert name="content">
+                Niste prijavljeni!
+            </ui:insert>
+        </div>
 
-<div id="footer">
-  <ui:insert name="footer">
-  		<hr />
-    	<label>© iTaxi, 2013</label>
-  </ui:insert>
-</div>
+        <div id="footer">
+            <ui:insert name="footer">
+                <hr />
+                <label>© iTaxi, 2013</label>
+            </ui:insert>
+        </div>
 
-</body>
+    </body>
 
 </html>

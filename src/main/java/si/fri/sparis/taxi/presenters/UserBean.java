@@ -1,10 +1,11 @@
-
 package si.fri.sparis.taxi.presenters;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.context.FacesContext;
 import si.fri.sparis.taxi.entites.Uporabnik;
+
 /**
  *
  * @author Kristian
@@ -13,11 +14,9 @@ import si.fri.sparis.taxi.entites.Uporabnik;
 @SessionScoped
 public class UserBean implements Serializable {
 
-    
     private Uporabnik uporabnik;
     private boolean isLogged;
-    
-    
+
     /**
      * Creates a new instance of UserBean
      */
@@ -32,8 +31,6 @@ public class UserBean implements Serializable {
         this.uporabnik = uporabnik;
     }
 
-    
-    
     public boolean isIsLogged() {
         return isLogged;
     }
@@ -41,5 +38,9 @@ public class UserBean implements Serializable {
     public void setIsLogged(boolean isLogged) {
         this.isLogged = isLogged;
     }
-    
+
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index.xhtml?faces-redirect=true";
+    }
 }

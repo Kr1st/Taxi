@@ -10,7 +10,7 @@
 	<ui:define name="content">
 	    <p>
                 <h:outputLabel value="Prijavljeni ste kot #{userBean.uporabnik.ime} #{userBean.uporabnik.priimek}." rendered="#{userBean.isLogged}" />
-                <h:graphicImage value="/resources/images/iTaxi.png" rendered="#{!userBean.isLogged}"/>
+                <h:graphicImage name="images/iTaxi.png" rendered="#{!userBean.isLogged}"/>
 		</p>
 	</ui:define>
 
