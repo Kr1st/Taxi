@@ -4,15 +4,89 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/template/template.xhtml">
+    
         
 	<ui:define name="content">
+            
+            <h:form id="form">  
+                <p:panel header="Uporabniki" id="panel">  
+                    <h:panelGrid columns="3" cellpadding="10" >  
+
+                        <h:outputLabel value="Ime: *" for="ime" />  
+                        <p:inputText id="ime" value="#{uporabnikCRUD.ime}" required="true"
+                                     requiredMessage="Potrebno je vnesti ime!"
+                                     validatorMessage="Ime se mora začeti z veliko začetnico!">  
+                            <f:validateRegex pattern="^[A-Z][a-zA-Z]*$" /> 
+                            <p:ajax update="msgIme" event="keyup" />  
+                        </p:inputText>  
+                        <p:message for="ime" id="msgIme" />
+
+
+
+                        <h:outputLabel value="Priimek: *" for="priimek" />  
+                        <p:inputText id="priimek" value="#{uporabnikCRUD.priimek}" required="true" 
+                                     requiredMessage="Potrebno je vnesti priimek!"
+                                     validatorMessage="Priimek se mora začeti z veliko začetnico!">
+                            <f:validateRegex pattern="^[A-Z][a-zA-Z]*$" /> 
+                            <p:ajax update="msgPriimek" event="keyup" />  
+                        </p:inputText>  
+                        <p:message for="priimek" id="msgPriimek" />
+
+
+                        <h:outputLabel value="Email: *" for="email" />  
+                        <p:inputText id="email" value="#{uporabnikCRUD.email}" required="true"
+                                     requiredMessage="Potrebno je vnesti email!"
+                                     validatorMessage="Napačen format emaila!">  
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                            <p:ajax update="msgEmail" event="keyup" />  
+                        </p:inputText>  
+                        <p:message for="email" id="msgEmail"/>
+
+
+                        <h:outputLabel for="pwd1" value="Geslo 1: *" />  
+                        <p:password id="pwd1" value="#{uporabnikCRUD.geslo1}" match="pwd2" label="Geslo 1" required="true" feedback="true" promptLabel="Vpišite geslo" weakLabel="Šibko"  
+                        goodLabel="Dobro" strongLabel="Močno"/>  
+
+                        <p:message for="pwd1"  id="msgPwd1" showDetail="true" />
+
+
+
+                    </h:panelGrid>
+                    <p:commandButton value="Dodaj" action="#{uporabnikCRUD.dodaj}" />
+                </p:panel>  
+
+
+            </h:form>  
+            
             <h:dataTable var="uporabnik" value="#{uporabnikCRUD.uporabniki}" >
                 <h:column>
                     <f:facet name="header">id</f:facet>
-                    #{uporabnik.IDUPORABNIK}
+                    #{uporabnik.iduporabnik}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Ime</f:facet>
+                    #{uporabnik.ime}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Priimek</f:facet>
+                    #{uporabnik.priimek}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{uporabnik.email}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Čas zandnje prijave</f:facet>
+                    #{uporabnik.zadnjaprijava}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Vloga</f:facet>
+                    #{uporabnik.vloga}
                 </h:column>
             </h:dataTable>
 	</ui:define>
