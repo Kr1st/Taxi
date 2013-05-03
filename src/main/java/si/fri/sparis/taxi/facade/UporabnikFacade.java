@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import si.fri.sparis.taxi.entites.Uporabnik;
 
 /**
@@ -33,11 +34,14 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
          List<Uporabnik> uporabnikResultList =
                 em.createNamedQuery("Uporabnik.findByEmail").
                 setParameter("email", uporabnik.getEmail()).getResultList();
-    
-         if(uporabnikResultList.size() > 0)
+         
+         
+         
+         if(!uporabnikResultList.isEmpty())
              return false;
          
-         this.create(uporabnik);
+         
+         em.persist(uporabnik);
          
          return true;
          

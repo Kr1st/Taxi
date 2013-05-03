@@ -4,8 +4,16 @@
  */
 package si.fri.sparis.taxi.presenters;
 
+import java.util.Date;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import si.fri.sparis.taxi.entites.Uporabnik;
+import si.fri.sparis.taxi.facade.UporabnikFacade;
 
 /**
  *
@@ -15,6 +23,10 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class RegisterBean {
 
+    @Inject
+    private UporabnikFacade uf;
+    
+    
     private String ime;
     private String priimek;
     private String email;
@@ -65,8 +77,27 @@ public class RegisterBean {
     }
 
     
-
     public String register(){
-        return "success";
+        Uporabnik uporabnik = new Uporabnik();
+        
+        uporabnik.setIme(this.ime);
+        uporabnik.setPriimek(this.priimek);
+        uporabnik.setEmail(this.email);
+        uporabnik.setGeslo(this.geslo1);
+        uporabnik.setVloga(1);
+        uporabnik.setZadnjaprijava(new Date());
+        
+        
+        //uf.create(uporabnik);
+        //return "success";
+        
+        if(uf.register(uporabnik)){
+            return "success";
+        }
+        else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Napaka pri registraciji", "Uporabnik s takšnim naslovom že obstaja"));
+            return "failure";
+            
+        }
     }
 }

@@ -19,7 +19,7 @@
                         <ui:fragment rendered="#{userBean.isLogged}"><h:commandLink action ="#{userBean.logout}"><li id="user"><h:outputLabel value="#{userBean.uporabnik.ime} #{userBean.uporabnik.priimek} " />
                                 <h:graphicImage name="images/logOuticon.PNG"  height="25px" width="25px" />
                             </li></h:commandLink></ui:fragment>
-                        <ui:fragment rendered="#{!userBean.isLogged}"><li><h:link value="Log in" outcome="/login/login.xhtml" /> </li> </ui:fragment>
+                        <ui:fragment rendered="#{!userBean.isLogged}"><li><h:link value="Log in" outcome="/login/login.xhtml" /> </li> <li><h:link value="Register" outcome="/register/register.xhtml" /> </li> </ui:fragment>
                     </ul>
                 </h:form>
 

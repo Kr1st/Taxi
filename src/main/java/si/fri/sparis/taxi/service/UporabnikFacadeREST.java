@@ -23,7 +23,7 @@ import si.fri.sparis.taxi.entites.Uporabnik;
  * @author Kristian
  */
 @Stateless
-@Path("si.fri.sparis.taxi.entites.uporabnik")
+@Path("uporabnik")
 public class UporabnikFacadeREST extends AbstractFacade<Uporabnik> {
     @PersistenceContext(unitName = "si.fri.sparis_Taxi_war_1.0-SNAPSHOTPU")
     private EntityManager em;
