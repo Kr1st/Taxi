@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.jms.JMSException;
 import si.fri.sparis.taxi.facade.NarociloFacade;
 
 
@@ -63,7 +64,12 @@ public class UstvariNarociloBean {
     
     
     public String naroci(){
-        nf.naroci(this.naslov, ub.getUporabnik());
+        try{
+            nf.naroci(this.naslov, ub.getUporabnik());
+        }
+        catch(JMSException ex){
+            return "failure";
+        }
         
         
         

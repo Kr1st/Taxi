@@ -13,8 +13,8 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -53,7 +53,7 @@ public class JMSSenderFacade {
         return s;
     }
     
-    public void send(MapMessage message) {
+    public void send(ObjectMessage message) {
         
         try {
             mp.send(message);
