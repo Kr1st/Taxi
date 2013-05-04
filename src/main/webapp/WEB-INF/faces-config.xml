@@ -31,5 +31,13 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <from-view-id>/administrator/uporabnik/seznamUporabnik.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/administrator/uporabnik/seznamUporabnik.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
     
 </faces-config>
