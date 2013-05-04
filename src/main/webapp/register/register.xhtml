@@ -45,14 +45,14 @@
                         <p:message for="email" id="msgEmail"/>
 
                             
-                        <h:outputLabel for="pwd1" value="Geslo 1: *" />  
-                        <p:password id="pwd1" value="#{registerBean.geslo1}" match="pwd2" label="Geslo 1" required="true" feedback="true" promptLabel="Vpišite geslo" weakLabel="Šibko"  
+                        <h:outputLabel for="pwd1" value="Geslo: *" />  
+                        <p:password id="pwd1" value="#{registerBean.geslo1}" match="pwd2" label="Geslo" required="true" feedback="true" promptLabel="Vpišite geslo" weakLabel="Šibko"  
                         goodLabel="Dobro" strongLabel="Močno"/>  
                         
                         <p:message for="pwd1"  id="msgPwd1" showDetail="true" />
                         
-                        <h:outputLabel for="pwd2" value="Geslo 2: *" />  
-                        <p:password id="pwd2" value="#{registerBean.geslo2}" label="Geslo 2" required="true"/> 
+                        <h:outputLabel for="pwd2" value="Ponovi geslo: *" />  
+                        <p:password id="pwd2" value="#{registerBean.geslo2}" label="Ponovi geslo" required="true"/> 
 
 
                     </h:panelGrid>
