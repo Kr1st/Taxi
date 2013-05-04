@@ -4,17 +4,105 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/template/template.xhtml">
+    
         
 	<ui:define name="content">
-            <h:dataTable var="uporabnik" value="#{uporabnikCRUD.uporabniki}" >
-                <h:column>
-                    <f:facet name="header">id</f:facet>
-                    #{uporabnik.IDUPORABNIK}
-                </h:column>
-            </h:dataTable>
+            
+            <h:form id="form">  
+  
+                <p:growl id="messages" showDetail="true"/>  
+                
+                <p:dataTable var="uporabnik" value="#{uporabnikCRUD.uporabniki}" id="userTable" editable="true" paginator="true" rows="10">  
+
+                    <f:facet name="header">  
+                        In-Cell Editing  
+                    </f:facet>  
+
+                    <p:ajax event="rowEdit" listener="#{uporabnikCRUD.onEdit}" update=":form:messages" />  
+                    <p:ajax event="rowEditCancel" listener="#{uporabnikCRUD.onCancel}" update=":form:messages" />  
+
+                    <p:column headerText="Id" style="width:30%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.iduporabnik}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{uporabnik.iduporabnik}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>  
+
+                    <p:column headerText="Ime" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.ime}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{uporabnikCRUD.ime}" style="width:100%" label="Year"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="Priimek" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.priimek}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{uporabnikCRUD.priimek}" style="width:100%" label="Year"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="Email" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.email}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{uporabnikCRUD.email}" style="width:100%" label="Year"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="Cas zadnje prijave" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.zadnjaprijava}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText style="width:100%" label="Year"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="Vloga" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{uporabnik.vloga}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{uporabnikCRUD.vloga}" style="width:100%" label="Year"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+
+                    
+                    <p:column style="width:6%">  
+                        <p:rowEditor />  
+                    </p:column>
+                    <p:column style="width:6%">  
+                        <h:commandLink value="Izbrisi" action="#{uporabnikCRUD.izbrisi(uporabnik)}" />
+                    </p:column> 
+
+                </p:dataTable>
+                
+                <br /> 
+                
+
+            </h:form>
+            <a href="./dodaj.xhtml">Dodaj novega uporabnika</a>
+            
 	</ui:define>
         
 </ui:composition>
