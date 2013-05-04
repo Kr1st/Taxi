@@ -138,13 +138,13 @@ public class UporabnikCRUD implements Serializable{
         FacesMessage msg = new FacesMessage("Uporabnik urejen", ((Uporabnik) event.getObject()).toString());  
         System.out.println(((Uporabnik) event.getObject()).getIme());
         System.out.println(ime);
-        if(!ime.equals(null) && !ime.equals(""))
+        if(!ime.equals(""))
             ((Uporabnik) event.getObject()).setIme(ime);
-        if(!priimek.equals(null) && !priimek.equals(""))
+        if(!priimek.equals(""))
             ((Uporabnik) event.getObject()).setPriimek(priimek);
-        if(!email.equals(null) && !email.equals(""))
+        if(!email.equals(""))
             ((Uporabnik) event.getObject()).setEmail(email);
-        if(!vloga.equals(null) && !vloga.equals(""))
+        if(!vloga.equals(""))
             ((Uporabnik) event.getObject()).setVloga(Integer.parseInt(vloga));
         
         uporabnikLogika.edit((Uporabnik) event.getObject());
