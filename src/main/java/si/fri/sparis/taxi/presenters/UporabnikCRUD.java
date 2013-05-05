@@ -24,7 +24,7 @@ import si.fri.sparis.taxi.facade.UporabnikFacade;
  * @author andrazhribernik
  */
 @Named(value = "uporabnikCRUD")
-@SessionScoped
+@RequestScoped
 public class UporabnikCRUD implements Serializable{
 
     /**
@@ -111,10 +111,11 @@ public class UporabnikCRUD implements Serializable{
     }
     
     public void dodaj(){
-        System.out.println("zacetek metode");
+        System.out.println("zacetek metode dodaj");
         Uporabnik uporabnik = new Uporabnik();
-        System.out.println("nov uporabnik "+uporabnik);
+        System.out.println("oo kreiranju");
         uporabnik.setIme(this.ime);
+        System.out.println("po setIme");
         System.out.println(uporabnik.getIme());
         uporabnik.setPriimek(this.priimek);
         uporabnik.setEmail(this.email);
