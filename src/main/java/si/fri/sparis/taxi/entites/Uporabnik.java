@@ -122,7 +122,9 @@ public class Uporabnik implements Serializable {
     }
 
     public void setIme(String ime) {
+        System.out.println("setIme "+ime);
         this.ime = ime;
+        System.out.println("setIme2 "+this.ime);
     }
 
     public String getPriimek() {
@@ -199,7 +201,8 @@ public class Uporabnik implements Serializable {
 
     @Override
     public String toString() {
-        return "si.fri.sparis.taxi.entites.Uporabnik[ iduporabnik=" + iduporabnik + " ]";
+        //return "si.fri.sparis.taxi.entites.Uporabnik[ iduporabnik=" + iduporabnik + " ]";
+        return iduporabnik.toString();
     }
     
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -23,7 +24,7 @@ import si.fri.sparis.taxi.facade.UporabnikFacade;
  * @author andrazhribernik
  */
 @Named(value = "uporabnikCRUD")
-@RequestScoped
+@SessionScoped
 public class UporabnikCRUD implements Serializable{
 
     /**
@@ -40,17 +41,36 @@ public class UporabnikCRUD implements Serializable{
     private String geslo1;
     private String vloga;
     
+    private Uporabnik editedUser;
+    
     private List<Uporabnik> uporabniki;
+    private List<Uporabnik> uporabnikiVloga;
+    private boolean firstTime = true;
+    
+    
     
     public List<Uporabnik> getUporabniki() {
-        uporabniki = uporabnikLogika.findAll();
+        if(firstTime){
+            uporabniki = uporabnikLogika.findAll();
+            firstTime = false;
+        }
         return uporabniki;
     }
 
+    public Uporabnik getEditedUser() {
+        return editedUser;
+    }
+
+    public void setEditedUser(Uporabnik editedUser) {
+        System.out.println("Edited user "+editedUser.getIme());
+        this.editedUser = editedUser;
+    }
+    
     public void setUporabniki(List<Uporabnik> uporabniki) {
         this.uporabniki = uporabniki;
     }
     public String getIme() {
+        System.out.println(ime);
         return ime;
     }
 
@@ -136,8 +156,10 @@ public class UporabnikCRUD implements Serializable{
     
     public void onEdit(RowEditEvent event) {  
         FacesMessage msg = new FacesMessage("Uporabnik urejen", ((Uporabnik) event.getObject()).toString());  
+        uporabnikLogika.updateUporabnik((Uporabnik) event.getObject());
         System.out.println(((Uporabnik) event.getObject()).getIme());
         System.out.println(ime);
+        /*
         if(!ime.equals(""))
             ((Uporabnik) event.getObject()).setIme(ime);
         if(!priimek.equals(""))
@@ -148,6 +170,8 @@ public class UporabnikCRUD implements Serializable{
             ((Uporabnik) event.getObject()).setVloga(Integer.parseInt(vloga));
         
         uporabnikLogika.edit((Uporabnik) event.getObject());
+        */
+        
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
       
@@ -162,5 +186,22 @@ public class UporabnikCRUD implements Serializable{
         FacesMessage msg = new FacesMessage("Uporabnik izbrisan: ", u.toString());  
   
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public List<Uporabnik> getUporabnikiVloga(){
+        uporabnikiVloga = uporabnikLogika.findByRole(2);
+        return uporabnikiVloga;
+    }
+    
+    public void setUporabnikiVloga(List<Uporabnik> u){
+        uporabnikiVloga = u;
+    }
+    
+    public void onCellEdit(RowEditEvent event){
+        System.out.println("onCellEdit");
+        Uporabnik utemp = (Uporabnik) event.getObject();
+        System.out.println(utemp.getIduporabnik());
+        setIme(utemp.getIme());
+    
     }
 }

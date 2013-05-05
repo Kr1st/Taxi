@@ -67,6 +67,24 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
         }
     }
     
+    public List<Uporabnik> findByRole(int vloga) {
+        List<Uporabnik> uporabnikResultList =
+                em.createNamedQuery("Uporabnik.findByVloga").
+                setParameter("vloga", vloga).getResultList();
+        return uporabnikResultList;
+    }
+    
+    public List<Uporabnik> findById(String id){
+        List<Uporabnik> uporabnikResultList =
+                em.createNamedQuery("Uporabnik.findByIduporabnik").
+                setParameter("iduporabnik", Integer.parseInt(id)).getResultList();
+        return uporabnikResultList;
+    }
+    
+    public void updateUporabnik(Uporabnik oldU){
+        em.merge(oldU);
+    }
+    
     
     
 }
