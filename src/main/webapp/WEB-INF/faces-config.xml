@@ -32,6 +32,18 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/narocilo/ustvariNarocilo.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/narocilo/ustvariNarociloSuccess.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/narocilo/ustvariNarociloFail.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/administrator/uporabnik/seznamUporabnik.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
