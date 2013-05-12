@@ -5,17 +5,17 @@
 package si.fri.sparis.taxi.facade;
 
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSException;
-import javax.jms.MapMessage;
 import javax.jms.ObjectMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import si.fri.sparis.taxi.entites.Narocilo;
 import si.fri.sparis.taxi.entites.Uporabnik;
+import si.fri.sparis.taxi.entites.Voznik;
 import si.fri.sparis.taxi.resources.Logging;
-
 
 /**
  *
@@ -23,12 +23,14 @@ import si.fri.sparis.taxi.resources.Logging;
  */
 @Stateless
 public class NarociloFacade extends AbstractFacade<Narocilo> {
+
     @PersistenceContext(unitName = "si.fri.sparis_Taxi_war_1.0-SNAPSHOTPU")
     private EntityManager em;
-
     @Inject
     private JMSSenderFacade senderFacade;
-    
+    @Inject
+    private JMSReceiverFacade receiverFacade;
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -37,26 +39,54 @@ public class NarociloFacade extends AbstractFacade<Narocilo> {
     public NarociloFacade() {
         super(Narocilo.class);
     }
-    
+
     @Logging
-    public void naroci(String naslov, Uporabnik uporabnik) throws JMSException{
+    public void naroci(String naslov, Uporabnik uporabnik) throws JMSException {
         Narocilo narocilo = new Narocilo();
         narocilo.setLokacija(naslov);
         narocilo.setIduporabnik(uporabnik);
         narocilo.setDatum(new Date());
         narocilo.setStatus(1);
-        
-        
+
+
         ObjectMessage msg = senderFacade.getSession().createObjectMessage();
-        
+
         //MapMessage msg = senderFacade.getSession().createMapMessage();
         //msg.setObject("narocilo", narocilo);
         msg.setObject(narocilo);
-        
-        
+
+
         senderFacade.send(msg);
-        
-    
+
+    }
+
+    public void narociPonovno(Narocilo narocilo) throws JMSException {
+        ObjectMessage msg = senderFacade.getSession().createObjectMessage();
+
+        //MapMessage msg = senderFacade.getSession().createMapMessage();
+        //msg.setObject("narocilo", narocilo);
+        msg.setObject(narocilo);
+
+
+        senderFacade.send(msg);
+
+    }
+
+    public Narocilo dobiNarocilo() throws JMSException {
+
+        ObjectMessage msg = receiverFacade.receive();
+        if(msg != null){
+            Narocilo narocilo = (Narocilo) msg.getObject();
+
+            return narocilo;
+        }
+        else
+            return null;
     }
     
+    public List<Narocilo> vpisiCenoNarocilo(Voznik voznik){
+        
+    
+        return em.createNamedQuery("Narocilo.findByStatusVoznik").setParameter("status", 2).setParameter("idvoznik", voznik).getResultList();
+    }
 }

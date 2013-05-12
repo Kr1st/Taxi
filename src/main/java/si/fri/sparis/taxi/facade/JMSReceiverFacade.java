@@ -58,8 +58,8 @@ public class JMSReceiverFacade {
 
         try {
 
-            Message msg = mc.receive();
-
+            Message msg = mc.receiveNoWait();
+            
             if (msg instanceof ObjectMessage) {
                 ObjectMessage omsg = (ObjectMessage) msg;
                 return omsg;
