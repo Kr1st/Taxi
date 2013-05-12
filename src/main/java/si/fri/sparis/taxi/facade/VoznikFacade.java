@@ -29,6 +29,7 @@ public class VoznikFacade extends AbstractFacade<Voznik> {
         super(Voznik.class);
     }
     
+<<<<<<< HEAD
     public Voznik findByIdUporabnik(Uporabnik uporabnik){
        List<Voznik> vozniki =  em.createNamedQuery("Voznik.findVoznikByIdUporabnik").setParameter("iduporabnik", uporabnik).getResultList();
     
@@ -37,6 +38,10 @@ public class VoznikFacade extends AbstractFacade<Voznik> {
        else
            return null;
     
+
+    public void dodajVoznika(Voznik v){
+        em.persist(v);
+>>>>>>> branch 'master' of https://github.com/Kr1st/Taxi.git
     }
     
 }
