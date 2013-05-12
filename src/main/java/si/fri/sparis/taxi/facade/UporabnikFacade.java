@@ -4,6 +4,7 @@
  */
 package si.fri.sparis.taxi.facade;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -60,6 +61,7 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
         if (!uporabnikResultList.isEmpty()) {
             uporabnik = uporabnikResultList.get(0);
             if (uporabnik.getGeslo().equals(geslo)) {
+                uporabnik.setZadnjaprijava(new Date(new Date().getTime()));
                 return uporabnik;
             } else {
                 return null;

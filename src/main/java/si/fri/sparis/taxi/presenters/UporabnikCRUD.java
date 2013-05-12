@@ -25,7 +25,7 @@ import si.fri.sparis.taxi.facade.UporabnikFacade;
  * @author andrazhribernik
  */
 @Named(value = "uporabnikCRUD")
-@SessionScoped
+@RequestScoped
 public class UporabnikCRUD implements Serializable{
 
     /**
