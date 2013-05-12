@@ -27,13 +27,9 @@
 
 
                 </p:panel>
-                <c:if test="#{sprejmiNarociloBean.narocilo  != null}">
-                    <!--<h:commandLink action="#{sprejmiNarociloBean.sprejmi()}" value="Login page + Param " />-->
-                   
-                    <!--<p:commandButton value="Zavrni" action="#{sprejmiNarociloBean.zavrni()}" ajax ="false"/>-->
-                </c:if>
-                <p:commandButton value="Sprejmi" action="#{sprejmiNarociloBean.sprejmi}" ajax ="false"  />
                 <p:commandButton value="Zavrni" action="#{sprejmiNarociloBean.zavrni}" ajax ="false"  />
+                <p:commandButton value="Sprejmi" action="#{sprejmiNarociloBean.sprejmi}" ajax ="false"  />
+                
             </h:form>  
 
         </ui:define>

@@ -61,6 +61,14 @@ public class VpisiCenoBean {
         this.izbranoNarocilo = izbranoNarocilo;
     }
     
+    public String vpisiCeno(){
+        System.out.println(this.izbranoNarocilo.getDatum());
+        
+        return "edit";
+        
+    
+    }
+    
     
     
 }
