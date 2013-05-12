@@ -7,7 +7,6 @@ package si.fri.sparis.taxi.presenters;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.jms.JMSException;
 import si.fri.sparis.taxi.entites.Narocilo;
@@ -24,21 +23,17 @@ public class SprejmiNarociloBean {
 
     @Inject
     private UserBean ub;
-    
     @Inject
     NarociloFacade nf;
-    
     @Inject
     VoznikFacade vf;
-    
-    
     private Narocilo narocilo;
-    
+
     public SprejmiNarociloBean() {
     }
 
     @PostConstruct
-    public void initialize() throws JMSException{
+    public void initialize() throws JMSException {
         this.narocilo = nf.dobiNarocilo();
     }
 
@@ -49,33 +44,31 @@ public class SprejmiNarociloBean {
     public void setNarocilo(Narocilo narocilo) {
         this.narocilo = narocilo;
     }
-    
-    public String sprejmi(){
-        
-        
-        if(this.narocilo != null){
+
+    public String zavrni() throws JMSException {
+        if (this.narocilo != null) {
+            nf.narociPonovno(this.narocilo);
+
+            return "zavrni";
+        } else {
+            return "napaka";
+        }
+
+    }
+
+    public String sprejmi() {
+
+
+        if (this.narocilo != null) {
             this.narocilo.setIdvoznik(vf.findByIdUporabnik(this.ub.getUporabnik()));
             this.narocilo.setStatus(2);
-        
+
             nf.create(this.narocilo);
             return "sprejmi";
-        }
-        else
+        } else {
             return "napaka";
-        
-        
-    }
-    
-    public String zavrni()throws JMSException{
-        if(this.narocilo != null){
-            nf.narociPonovno(this.narocilo);
-        
-            return "zavrni";
         }
-        else
-            return "napaka";
-        
+
+
     }
-    
-    
 }
