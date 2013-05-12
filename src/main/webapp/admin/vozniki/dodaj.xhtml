@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+    
+        
+	<ui:define name="content">
+            
+            <h:form id="form">
+                <p:growl id="messages" showDetail="true"/> 
+                <p:panel header="Uporabniki" id="panel">  
+                    <h:panelGrid columns="3" cellpadding="10" id="userDetails">   
+                        
+                        <h:outputLabel value="Uporabnik: *" for="vozilo" />
+                        <h:selectOneMenu value="#{voznikiCRUD.novVoznikUporabnik}">  
+                            <f:selectItems value="#{voznikiCRUD.uporabniki}"  
+                                var="uporabnik"   
+                                itemLabel="#{uporabnik.ime} #{uporabnik.priimek}"  
+                                itemValue="#{uporabnik}" />  
+                        </h:selectOneMenu>
+                        <br />
+                        <h:outputLabel value="Vozilo: *" for="vozilo" />  
+                        <p:inputText id="vozilo" value="#{voznikiCRUD.avtomobil}" ></p:inputText>                        
+
+                    </h:panelGrid>                   
+                    <p:commandButton value="Dodaj" action="#{voznikiCRUD.dodaj}" id="dodaj" ajax="true" update="messages" />
+                    
+                    
+                </p:panel>
+            </h:form>
+            <a href="./seznamVoznikov.xhtml">Nazaj na seznam</a>
+	</ui:define>
+        
+</ui:composition>
+</html>

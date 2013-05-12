@@ -37,12 +37,13 @@ public class UporabnikConverter implements Converter{
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         Uporabnik temp = findById(value);
+        //System.out.println("Object "+temp.getIme());
         return temp;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-
+        //System.out.println("toString "+value.toString());
         return value.toString();
 
     }

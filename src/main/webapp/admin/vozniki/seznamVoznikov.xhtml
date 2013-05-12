@@ -31,7 +31,7 @@
                                 <h:outputText value="#{voznik.idvoznik}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{voznik.idvoznik}" style="width:100%"/>  
+                                <p:inputText value="#{voznik.idvoznik}" style="width:100%" readonly="true"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>  
@@ -42,10 +42,10 @@
                                 <h:outputText value="#{voznik.iduporabnik.ime} #{voznik.iduporabnik.priimek}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <h:selectOneMenu value="#{voznik.iduporabnik}" >  
+                                <h:selectOneMenu value="#{voznik.iduporabnik}" readonly="true">  
                                     <f:selectItems value="#{voznikiCRUD.uporabniki}"  
                                         var="uporabnik"   
-                                        itemLabel="#{uporabnik}"  
+                                        itemLabel="#{uporabnik.ime} #{uporabnik.priimek}"  
                                         itemValue="#{uporabnik}" />  
                                 </h:selectOneMenu>
                             </f:facet>  
@@ -67,7 +67,7 @@
                         <p:rowEditor />  
                     </p:column>
                     <p:column style="width:6%">  
-                        <h:commandLink value="Izbrisi" action="#{uporabnikCRUD.izbrisi(uporabnik)}" />
+                        <h:commandLink value="Izbrisi" action="#{voznikiCRUD.izbrisi(voznik)}" />
                     </p:column> 
 
                 </p:dataTable>

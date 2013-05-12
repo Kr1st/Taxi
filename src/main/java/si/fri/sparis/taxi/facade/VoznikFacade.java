@@ -27,4 +27,8 @@ public class VoznikFacade extends AbstractFacade<Voznik> {
         super(Voznik.class);
     }
     
+    public void dodajVoznika(Voznik v){
+        em.persist(v);
+    }
+    
 }

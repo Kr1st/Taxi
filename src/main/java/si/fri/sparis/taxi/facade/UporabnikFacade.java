@@ -37,8 +37,10 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
          
          
          
-         if(!uporabnikResultList.isEmpty())
+         if(!uporabnikResultList.isEmpty()){
+             System.out.println("Nasel uporabnika z enakim emailom");
              return false;
+         }
          
          
          em.persist(uporabnik);

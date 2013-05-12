@@ -7,6 +7,7 @@ package si.fri.sparis.taxi.presenters;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -24,7 +25,7 @@ import si.fri.sparis.taxi.facade.UporabnikFacade;
  * @author andrazhribernik
  */
 @Named(value = "uporabnikCRUD")
-@RequestScoped
+@SessionScoped
 public class UporabnikCRUD implements Serializable{
 
     /**
@@ -47,13 +48,18 @@ public class UporabnikCRUD implements Serializable{
     private List<Uporabnik> uporabnikiVloga;
     private boolean firstTime = true;
     
-    
+    @PostConstruct
+    public void init(){
+        uporabniki = uporabnikLogika.findAll();
+    }
     
     public List<Uporabnik> getUporabniki() {
+        /*
         if(firstTime){
             uporabniki = uporabnikLogika.findAll();
             firstTime = false;
         }
+        * */
         return uporabniki;
     }
 
@@ -126,17 +132,18 @@ public class UporabnikCRUD implements Serializable{
         uporabnik.setZadnjaprijava(new Date());
         System.out.println("datum");
         System.out.println("Pred dodajanjem");
-        
-       
+              
         
         if(!uporabnikLogika.register(uporabnik)){
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Napaka pri registraciji", "Uporabnik s takšnim naslovom že obstaja"));
-            FacesMessage msg = new FacesMessage("Uporabnik s tem email naslovom ze obstaja ", uporabnik.toString());  
+            FacesMessage msg = new FacesMessage("Napaka","Uporabnik s tem email naslovom ze obstaja ");  
   
             FacesContext.getCurrentInstance().addMessage(null, msg);
             System.out.println("Ni dodal");
         }
         else{
+            //uporabnikLogika.create(uporabnik);
+            uporabniki.add(uporabnik);
             FacesMessage msg = new FacesMessage("Uporabnik dodan: ", uporabnik.toString());  
   
             FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -183,6 +190,7 @@ public class UporabnikCRUD implements Serializable{
     }
     
     public void izbrisi(Uporabnik u){
+        uporabniki.remove(u);
         uporabnikLogika.remove(u);
         FacesMessage msg = new FacesMessage("Uporabnik izbrisan: ", u.toString());  
   
