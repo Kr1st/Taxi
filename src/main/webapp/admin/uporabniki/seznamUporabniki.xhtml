@@ -22,16 +22,16 @@
                         In-Cell Editing  
                     </f:facet>  
 
-                    <p:ajax event="rowEdit" listener="#{uporabnikCRUD.onEdit}" update=":form:messages" />  
-                    <p:ajax event="rowEditCancel" listener="#{uporabnikCRUD.onCancel}" update=":form:messages" />  
-
+                    <p:ajax event="rowEdit" listener="#{uporabnikCRUD.onEdit}" update="@this :form:messages" immediate="true" />  
+                    <p:ajax event="rowEditCancel" listener="#{uporabnikCRUD.onCancel}" />  
+                    
                     <p:column headerText="Id" style="width:30%">  
                         <p:cellEditor>  
                             <f:facet name="output">  
                                 <h:outputText value="#{uporabnik.iduporabnik}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{uporabnik.iduporabnik}" style="width:100%"/>  
+                                <p:inputText value="#{uporabnik.iduporabnik}" readonly="true" style="width:100%"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>  
@@ -42,7 +42,7 @@
                                 <h:outputText value="#{uporabnik.ime}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{uporabnikCRUD.ime}" style="width:100%" label="Year"/>  
+                                <p:inputText value="#{uporabnik.ime}" style="width:100%" />  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -52,7 +52,7 @@
                                 <h:outputText value="#{uporabnik.priimek}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{uporabnikCRUD.priimek}" style="width:100%" label="Year"/>  
+                                <p:inputText value="#{uporabnik.priimek}" style="width:100%" label="Year"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -62,7 +62,7 @@
                                 <h:outputText value="#{uporabnik.email}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{uporabnikCRUD.email}" style="width:100%" label="Year"/>  
+                                <p:inputText value="#{uporabnik.email}" style="width:100%" label="Year"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -72,7 +72,7 @@
                                 <h:outputText value="#{uporabnik.zadnjaprijava}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText style="width:100%" label="Year"/>  
+                                <p:inputText value="#{uporabnik.zadnjaprijava}" readonly="true" style="width:100%" label="Year"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -82,7 +82,7 @@
                                 <h:outputText value="#{uporabnik.vloga}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{uporabnikCRUD.vloga}" style="width:100%" label="Year"/>  
+                                <p:inputText value="#{uporabnik.vloga}" style="width:100%" label="Year"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -92,7 +92,7 @@
                         <p:rowEditor />  
                     </p:column>
                     <p:column style="width:6%">  
-                        <h:commandLink value="Izbrisi" action="#{uporabnikCRUD.izbrisi(uporabnik)}" />
+                        <p:commandLink value="Izbrisi" action="#{uporabnikCRUD.izbrisi(uporabnik)}" update=":form:userTable" />
                     </p:column> 
 
                 </p:dataTable>

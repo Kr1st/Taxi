@@ -76,6 +76,15 @@
             <to-view-id>/administrator/uporabnik/seznamUporabnik.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+    </application>
     
-    
+    <converter>
+        <converter-for-class>si.fri.sparis.taxi.entites.Uporabnik</converter-for-class>
+        <converter-class>si.fri.sparis.taxi.entites.UporabnikConverter</converter-class>
+    </converter>
 </faces-config>

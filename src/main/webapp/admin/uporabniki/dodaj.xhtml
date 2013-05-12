@@ -11,10 +11,12 @@
     
         
 	<ui:define name="content">
+            
             <h:form id="form">
+                <p:growl id="messages" showDetail="true"/> 
                 <p:panel header="Uporabniki" id="panel">  
-                    <h:panelGrid columns="3" cellpadding="10" id="userDetails">  
-
+                    <h:panelGrid columns="3" cellpadding="10" id="userDetails">   
+                        
                         <h:outputLabel value="Ime: *" for="ime" />  
                         <p:inputText id="ime" value="#{uporabnikCRUD.ime}" required="true"
                                      requiredMessage="Potrebno je vnesti ime!"
@@ -62,9 +64,10 @@
                         <p:message for="vloga" id="msgVloga"/>
 
 
-                    </h:panelGrid>
-                    <p:commandButton value="Dodaj" action="#{uporabnikCRUD.dodaj}" id="dodaj" />
-                    <p:message for="dodaj" id="msgVloga"/>
+                    </h:panelGrid>                   
+                    <p:commandButton value="Dodaj" action="#{uporabnikCRUD.dodaj}" id="dodaj" ajax="true" update="messages" />
+                    
+                    
                 </p:panel>
             </h:form>
             <a href="./seznamUporabniki.xhtml">Nazaj na seznam</a>
