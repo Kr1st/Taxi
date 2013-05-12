@@ -19,16 +19,16 @@
                         <ui:fragment rendered="#{userBean.isLogged}">
                             <ui:fragment rendered="#{userBean.uporabnik.vloga == 1}">
                                 <li>
-                                    <h:link value="Naroči taksi" outcome="/narocilo/ustvariNarocilo.xhtml?faces-redirect=true" />
+                                    <h:link value="Naroči taksi" outcome="/narocilo/ustvariNarocilo.xhtml" />
                                 </li>
                             </ui:fragment>
                             <ui:fragment rendered="#{userBean.uporabnik.vloga == 2}">
                                 <li>
-                                    <h:link value="Sprejmi naročilo" outcome="/narociloVoznik/sprejmiNarocilo.xhtml?faces-redirect=true" />
+                                    <h:link value="Sprejmi naročilo" outcome="/narociloVoznik/sprejmiNarocilo.xhtml" />
 
                                 </li>
                                 <li>
-                                    <h:link value="Vpiši ceno" outcome="/narociloVoznik/vpisiCeno.xhtml?faces-redirect=true" />
+                                    <h:link value="Vpiši ceno" outcome="/narociloVoznik/vpisiCeno.xhtml" />
                                 </li>
                             </ui:fragment>
                             <h:commandLink action ="#{userBean.logout}">

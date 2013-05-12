@@ -8,12 +8,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import si.fri.sparis.taxi.entites.Narocilo;
 import si.fri.sparis.taxi.entites.Voznik;
 import si.fri.sparis.taxi.facade.NarociloFacade;
 import si.fri.sparis.taxi.facade.VoznikFacade;
-
+import javax.faces.context.FacesContext;  
+import org.primefaces.event.CellEditEvent;
 /**
  *
  * @author Kristian
@@ -61,10 +63,14 @@ public class VpisiCenoBean {
         this.izbranoNarocilo = izbranoNarocilo;
     }
     
-    public String vpisiCeno(){
-        System.out.println(this.izbranoNarocilo.getDatum());
-        
-        return "edit";
+    public void vpisiCeno(CellEditEvent event){
+        Object oldValue = event.getOldValue();  
+        Object newValue = event.getNewValue();  
+
+        if(newValue != null && !newValue.equals(oldValue)) {  
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
+            FacesContext.getCurrentInstance().addMessage(null, msg);  
+        }  
         
     
     }

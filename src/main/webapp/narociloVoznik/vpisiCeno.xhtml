@@ -10,38 +10,41 @@
     <ui:composition template="/template/template.xhtml">
         <ui:define name="content">
             <h:form id="form">  
-                <p:dataTable id="narocila" var="narocilo" value="#{vpisiCenoBean.narocila}" rowKey="#{narocilo.idnarocilo}"  
-                             selection="#{vpisiCenoBean.izbranoNarocilo}" selectionMode="single">  
+                <p:growl id="messages" showDetail="true"/>  
+
+                
+
+                <p:dataTable id="narocila" var="narocilo" value="#{vpisiCenoBean.narocila}" editable="true" editMode="cell" rowKey="#{narocilo.idnarocilo}"  
+                             selection="#{sprejmiNarociloBean.izbranoNarocilo}" selectionMode="single" >  
 
                     <f:facet name="header">  
-                        Izberi naročilo za vpis cene  
+                        Vpiši ceno  
                     </f:facet>  
 
-                    <p:column headerText="Ime">  
-                        #{narocilo.iduporabnik.ime}  
+                    <p:ajax event="cellEdit" listener="#{vpisiCenoBean.vpisiCeno}" update=":form:messages" />  
+
+                    <p:column headerText="Ime" style="width:25%">  
+                        ${narocilo.iduporabnik.ime} 
+                    </p:column>
+                    
+                    <p:column headerText="Priimek" style="width:25%">  
+                        ${narocilo.iduporabnik.priimek} 
+                    </p:column>
+                    
+                    <p:column headerText="Lokacija" style="width:25%">  
+                        ${narocilo.lokacija} 
                     </p:column>  
 
-                    <p:column headerText="Priimek">  
-                        #{narocilo.iduporabnik.priimek}  
+                    <p:column headerText="Cena" style="width:25%">  
+                        <p:cellEditor>  
+                            <f:facet name="output"><h:outputText value="#{narocilo.cena}" /></f:facet>  
+                            <f:facet name="input"><p:inputText value="#{narocilo.cena}" style="width:96%" label="Year"/></f:facet>  
+                        </p:cellEditor>  
                     </p:column>  
-
-                    <p:column headerText="Naslov" >  
-                        #{narocilo.lokacija}  
-                    </p:column>  
-
-                    <p:column headerText="Datum">  
-                        #{narocilo.datum}  
-                    </p:column>  
-
-                    <f:facet name="footer">  
-                        <!--<p:commandButton id="viewButton" value="View" icon="ui-icon-search"  
-                                         update=":form:display" oncomplete="carDialog.show()"/> -->
-                        <p:commandButton value="Vpiši ceno" action="#{vpisiCenoBean.vpisiCeno}" ajax ="false"  />
-                    </f:facet>  
 
                 </p:dataTable>  
 
-                
+
 
             </h:form>    
 

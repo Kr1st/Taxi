@@ -8,7 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -19,12 +22,14 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import si.fri.sparis.taxi.entites.Narocilo;
 
 /**
  *
  * @author Kristian
  */
 @Singleton
+@Startup
 public class JMSReceiverFacade {
 
     private String url = ActiveMQConnection.DEFAULT_BROKER_URL;
@@ -32,6 +37,11 @@ public class JMSReceiverFacade {
     private Connection c;
     private Session s;
     private MessageConsumer mc;
+    
+    
+    @EJB
+    private NarociloFacade nf;
+    
 
     @PostConstruct
     public void init() {
@@ -70,6 +80,17 @@ public class JMSReceiverFacade {
         }
 
         return null;
+    }
+    
+    @Schedule(hour = "*",minute = "*",second = "*/30")
+    public void writeToBase() throws JMSException{
+        ObjectMessage om = this.receive();
+        if (om != null){
+            Narocilo narocilo = (Narocilo) om.getObject();
+            nf.create(narocilo);
+            
+        }
+    
     }
 
     @PreDestroy

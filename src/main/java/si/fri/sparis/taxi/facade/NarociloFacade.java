@@ -28,8 +28,6 @@ public class NarociloFacade extends AbstractFacade<Narocilo> {
     private EntityManager em;
     @Inject
     private JMSSenderFacade senderFacade;
-    @Inject
-    private JMSReceiverFacade receiverFacade;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -60,33 +58,17 @@ public class NarociloFacade extends AbstractFacade<Narocilo> {
 
     }
 
-    public void narociPonovno(Narocilo narocilo) throws JMSException {
-        ObjectMessage msg = senderFacade.getSession().createObjectMessage();
-
-        //MapMessage msg = senderFacade.getSession().createMapMessage();
-        //msg.setObject("narocilo", narocilo);
-        msg.setObject(narocilo);
-
-
-        senderFacade.send(msg);
-
-    }
-
-    public Narocilo dobiNarocilo() throws JMSException {
-
-        ObjectMessage msg = receiverFacade.receive();
-        if(msg != null){
-            Narocilo narocilo = (Narocilo) msg.getObject();
-
-            return narocilo;
-        }
-        else
-            return null;
-    }
+   
     
     public List<Narocilo> vpisiCenoNarocilo(Voznik voznik){
         
     
         return em.createNamedQuery("Narocilo.findByStatusVoznik").setParameter("status", 2).setParameter("idvoznik", voznik).getResultList();
+    }
+    
+    
+    public List<Narocilo> dobiVsaNarocila(){
+    
+        return em.createNamedQuery("Narocilo.findByStatus").setParameter("status", 1).getResultList();
     }
 }

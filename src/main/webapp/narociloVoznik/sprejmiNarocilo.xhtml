@@ -11,26 +11,40 @@
     <ui:composition template="/template/template.xhtml">
         <ui:define name="content">
             <h:form id="form">  
-                <p:panel header="Naroči taksi" id="panel">
-                    <c:if test="#{sprejmiNarociloBean.narocilo  != null}">
-                        <h:outputText value="Ime: #{sprejmiNarociloBean.narocilo.iduporabnik.ime}" />
-                        <br />
-                        <h:outputText value="Priimek: #{sprejmiNarociloBean.narocilo.iduporabnik.priimek}" />
-                        <br />
-                        <h:outputText value="Naslov: #{sprejmiNarociloBean.narocilo.lokacija}" />
-                    </c:if>
+                <p:dataTable id="narocila" var="narocilo" value="#{sprejmiNarociloBean.narocila}" rowKey="#{narocilo.idnarocilo}"  
+                             selection="#{sprejmiNarociloBean.izbranoNarocilo}" selectionMode="single">  
 
-                    <c:if test="#{sprejmiNarociloBean.narocilo  == null}">
-                        <h:outputText value="V vrsti ni nobenega sporočila" />
-                    </c:if>
+                    <f:facet name="header">  
+                        Izberi naročilo, ki ga želite izvesti  
+                    </f:facet>  
 
+                    <p:column headerText="Ime">  
+                        #{narocilo.iduporabnik.ime}  
+                    </p:column>  
 
+                    <p:column headerText="Priimek">  
+                        #{narocilo.iduporabnik.priimek}  
+                    </p:column>  
 
-                </p:panel>
-                <p:commandButton value="Zavrni" action="#{sprejmiNarociloBean.zavrni}" ajax ="false"  />
-                <p:commandButton value="Sprejmi" action="#{sprejmiNarociloBean.sprejmi}" ajax ="false"  />
+                    <p:column headerText="Naslov" >  
+                        #{narocilo.lokacija}  
+                    </p:column>  
+
+                    <p:column headerText="Datum">  
+                        #{narocilo.datum}  
+                    </p:column>  
+
+                    <f:facet name="footer">  
+                        <!--<p:commandButton id="viewButton" value="View" icon="ui-icon-search"  
+                                         update=":form:display" oncomplete="carDialog.show()"/> -->
+                        <p:commandButton value="Sprejmi" action="#{sprejmiNarociloBean.sprejmi}" ajax ="false"  />
+                    </f:facet>  
+
+                </p:dataTable>  
+
                 
-            </h:form>  
+
+            </h:form>      
 
         </ui:define>
     </ui:composition>
