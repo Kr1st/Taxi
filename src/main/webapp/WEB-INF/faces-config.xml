@@ -53,6 +53,23 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/narociloVoznik/sprejmiNarocilo.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sprejmi</from-outcome>
+            <to-view-id>/narociloVoznik/narociloSprejeto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>zavrni</from-outcome>
+            <to-view-id>/narociloVoznik/narociloZavrnjeno.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>napaka</from-outcome>
+            <to-view-id>/narociloVoznik/napakaSprejema.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
         <from-view-id>/administrator/uporabnik/seznamUporabnik.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>

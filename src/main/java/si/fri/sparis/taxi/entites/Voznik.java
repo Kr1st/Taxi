@@ -34,6 +34,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @NamedQueries({
     @NamedQuery(name = "Voznik.findAll", query = "SELECT v FROM Voznik v"),
     @NamedQuery(name = "Voznik.findByIdvoznik", query = "SELECT v FROM Voznik v WHERE v.idvoznik = :idvoznik"),
+    @NamedQuery(name = "Voznik.findVoznikByIdUporabnik", query = "SELECT v FROM Voznik v WHERE v.iduporabnik = :iduporabnik"),
     @NamedQuery(name = "Voznik.findByVozilo", query = "SELECT v FROM Voznik v WHERE v.vozilo = :vozilo")})
 public class Voznik implements Serializable {
     private static final long serialVersionUID = 1L;

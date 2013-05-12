@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head />
+    <ui:composition template="/template/template.xhtml">
+        <ui:define name="content">
+            <h:form id="form">  
+                <p:dataTable id="narocila" var="narocilo" value="#{vpisiCenoBean.narocila}" rowKey="#{narocilo.idnarocilo}"  
+                             selection="#{vpisiCenoBean.izbranoNarocilo}" selectionMode="single">  
+
+                    <f:facet name="header">  
+                        Izberi naročilo za vpis cene  
+                    </f:facet>  
+
+                    <p:column headerText="Ime">  
+                        #{narocilo.iduporabnik.ime}  
+                    </p:column>  
+
+                    <p:column headerText="Priimek">  
+                        #{narocilo.iduporabnik.priimek}  
+                    </p:column>  
+
+                    <p:column headerText="Naslov" >  
+                        #{narocilo.lokacija}  
+                    </p:column>  
+
+                    <p:column headerText="Datum">  
+                        #{narocilo.datum}  
+                    </p:column>  
+
+                    <f:facet name="footer">  
+                        <!--<p:commandButton id="viewButton" value="View" icon="ui-icon-search"  
+                                         update=":form:display" oncomplete="carDialog.show()"/> -->
+                        <p:commandButton value="Vpiši ceno" action="#{vpisiCenoBean.vpisiCeno}" ajax ="false"  />
+                    </f:facet>  
+
+                </p:dataTable>  
+
+                
+
+            </h:form>    
+
+        </ui:define>
+    </ui:composition>
+</html>
