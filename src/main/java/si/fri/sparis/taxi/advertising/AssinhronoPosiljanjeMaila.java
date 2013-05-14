@@ -79,7 +79,7 @@ public class AssinhronoPosiljanjeMaila {
         for (int i=0; i<uporabniki.size();i++){
             if(uporabniki.get(i).getZadnjaprijava().before(new Date(new Date().getTime() - 5 * 60 * 1000))){
                 System.out.println("Uporabnik se ze dolgo ni prijavil "+uporabniki.get(i).getEmail());
-                posljiEmail(uporabniki.get(i));
+                //posljiEmail(uporabniki.get(i));
             }
             else{
                 System.out.println("Uporabnik je bil prijavlen, ne dolgo nazaj "+uporabniki.get(i).getEmail());

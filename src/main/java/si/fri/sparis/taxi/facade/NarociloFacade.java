@@ -71,4 +71,9 @@ public class NarociloFacade extends AbstractFacade<Narocilo> {
     
         return em.createNamedQuery("Narocilo.findByStatus").setParameter("status", 1).getResultList();
     }
+    
+    public void dodaj(Narocilo n){
+        n.setDatum(new Date());
+        em.persist(n);
+    }
 }

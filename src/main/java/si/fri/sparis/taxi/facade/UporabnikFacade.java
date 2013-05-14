@@ -78,12 +78,13 @@ public class UporabnikFacade extends AbstractFacade<Uporabnik> {
         return uporabnikResultList;
     }
     
-    public List<Uporabnik> findById(String id){
-        List<Uporabnik> uporabnikResultList =
+    public List findById(String id){
+        List uporabnikResultList =
                 em.createNamedQuery("Uporabnik.findByIduporabnik").
                 setParameter("iduporabnik", Integer.parseInt(id)).getResultList();
         return uporabnikResultList;
     }
+    
     
     public void updateUporabnik(Uporabnik oldU){
         em.merge(oldU);

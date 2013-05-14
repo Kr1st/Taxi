@@ -14,63 +14,54 @@
             
             <h:form id="form">
                 <p:growl id="messages" showDetail="true"/> 
-                <p:panel header="Uporabniki" id="panel">  
+                <p:panel header="Narocilo" id="panel">  
                     <h:panelGrid columns="3" cellpadding="10" id="userDetails">   
                         
-                        <h:outputLabel value="Ime: *" for="ime" />  
-                        <p:inputText id="ime" value="#{uporabnikCRUD.ime}" required="true"
-                                     requiredMessage="Potrebno je vnesti ime!"
-                                     validatorMessage="Ime se mora začeti z veliko začetnico!">  
-                            <f:validateRegex pattern="^[A-Z][a-zA-Z]*$" /> 
-                            <p:ajax update="msgIme" event="keyup" />  
+                        <h:outputLabel value="Uporabnik: *"  />
+                        <h:selectOneMenu value="#{narociloCRUD.izbranUporabnik}">  
+                            <f:selectItems value="#{narociloCRUD.uporabniki}"  
+                                var="uporabnik"   
+                                itemLabel="#{uporabnik.ime} #{uporabnik.priimek}"  
+                                itemValue="#{uporabnik}" />  
+                        </h:selectOneMenu>
+                        <br />
+
+                        <h:outputLabel value="Voznik: *"  />
+                        <h:selectOneMenu value="#{narociloCRUD.izbranVoznik}">  
+                            <f:selectItems value="#{narociloCRUD.vozniki}"  
+                                var="voznik"   
+                                itemLabel="#{voznik.iduporabnik.ime} #{voznik.iduporabnik.ime}"  
+                                itemValue="#{voznik}" />  
+                        </h:selectOneMenu>
+                        <br />
+
+                        <h:outputLabel value="Lokacija: *"  />  
+                        <p:inputText id="lokacija" value="#{narociloCRUD.lokacija}" required="true" requiredMessage="Potrebno je vnesti lokacijo!" >
                         </p:inputText>  
-                        <p:message for="ime" id="msgIme" />
+                           <br />
+                        <h:outputLabel value="Status: *" />  
+                        <h:selectOneMenu id="status" value="#{narociloCRUD.status}">  
+                            <f:selectItem itemLabel="1" itemValue="#{1}"/>
+                            <f:selectItem itemLabel="2" itemValue="#{2}"/>
+                            <f:selectItem itemLabel="3" itemValue="#{3}"/>
+                        </h:selectOneMenu>
+                        
+                        <p:message for="status" id="msgStatus" />
+                        
+                        <h:outputLabel value="Cena *" />  
+                        <p:inputText id="cena" value="#{narociloCRUD.cena}">
 
-
-
-                        <h:outputLabel value="Priimek: *" for="priimek" />  
-                        <p:inputText id="priimek" value="#{uporabnikCRUD.priimek}" required="true" 
-                                     requiredMessage="Potrebno je vnesti priimek!"
-                                     validatorMessage="Priimek se mora začeti z veliko začetnico!">
-                            <f:validateRegex pattern="^[A-Z][a-zA-Z]*$" /> 
-                            <p:ajax update="msgPriimek" event="keyup" />  
                         </p:inputText>  
-                        <p:message for="priimek" id="msgPriimek" />
-
-
-                        <h:outputLabel value="Email: *" for="email" />  
-                        <p:inputText id="email" value="#{uporabnikCRUD.email}" required="true"
-                                     requiredMessage="Potrebno je vnesti email!"
-                                     validatorMessage="Napačen format emaila!">  
-                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                            <p:ajax update="msgEmail" event="keyup" />  
-                        </p:inputText>  
-                        <p:message for="email" id="msgEmail"/>
-
-
-                        <h:outputLabel for="pwd1" value="Geslo 1: *" />  
-                        <p:password id="pwd1" value="#{uporabnikCRUD.geslo1}" label="Geslo" required="true" feedback="true" promptLabel="Vpišite geslo" weakLabel="Šibko"  
-                        goodLabel="Dobro" strongLabel="Močno"/>  
-
-                        <p:message for="pwd1"  id="msgPwd1" showDetail="true" />
-
-                        <h:outputLabel value="Vloga: *" for="vloga" />  
-                        <p:inputText id="vloga" value="#{uporabnikCRUD.vloga}" required="true"
-                                     requiredMessage="Potrebno je vnesti vlogo!"
-                                     validatorMessage="Napačen format vloge!">  
-                            <f:validateRegex pattern="^[123]$" />
-                            <p:ajax update="msgVloga" event="keyup" />  
-                        </p:inputText>  
-                        <p:message for="vloga" id="msgVloga"/>
+                        
 
 
                     </h:panelGrid>                   
-                    <p:commandButton value="Dodaj" action="#{uporabnikCRUD.dodaj}" id="dodaj" ajax="true" update="messages" />
+                    <p:commandButton value="Dodaj" action="#{narociloCRUD.dodaj}" id="dodaj" ajax="true" update="messages" />
                     
                     
                 </p:panel>
             </h:form>
-            <a href="./seznamUporabniki.xhtml">Nazaj na seznam</a>
+            <a href="./seznamNarocil.xhtml">Nazaj na seznam</a>
 	</ui:define>
         
 </ui:composition>

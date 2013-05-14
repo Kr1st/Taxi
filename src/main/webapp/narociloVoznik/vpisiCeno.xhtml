@@ -14,7 +14,7 @@
 
                 
 
-                <p:dataTable id="narocila" var="narocilo" value="#{vpisiCenoBean.narocila}" editable="true" editMode="cell" >  
+                <p:dataTable id="narocila" var="narocilo" value="#{vpisiCenoBean.narocila}" editable="true" editMode="cell" rowKey="#{narocilo.idnarocilo}"  selection="#{vpisiCenoBean.izbranoNarocilo}" selectionMode="single" >  
 
                     <f:facet name="header">  
                         Vpiši ceno  
@@ -39,7 +39,13 @@
                             <f:facet name="output"><h:outputText value="#{narocilo.cena}" /></f:facet>  
                             <f:facet name="input"><p:inputText value="#{narocilo.cena}" style="width:96%" label="Year"/></f:facet>  
                         </p:cellEditor>  
-                    </p:column>  
+                    </p:column>
+                    
+                    <f:facet name="footer">  
+                        <!--<p:commandButton id="viewButton" value="View" icon="ui-icon-search"  
+                                         update=":form:display" oncomplete="carDialog.show()"/> -->
+                        <p:commandButton value="Zakljuci" action="#{vpisiCenoBean.zakljuciNarocilo}" ajax ="false"  />
+                    </f:facet> 
 
                 </p:dataTable>  
 

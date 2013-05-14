@@ -24,7 +24,7 @@ import si.fri.sparis.taxi.facade.VoznikFacade;
  * @author andrazhribernik
  */
 @Named(value = "voznikiCRUD")
-@SessionScoped
+@RequestScoped
 public class VoznikiCRUD implements Serializable{
 
     /**
@@ -32,7 +32,8 @@ public class VoznikiCRUD implements Serializable{
      */
     @Inject
     private VoznikFacade voznikiLogika;
-    @Inject UporabnikFacade uporabnikLogika;
+    @Inject 
+    private UporabnikFacade uporabnikLogika;
     private List<Voznik> vozniki;
     private List<Uporabnik> uporabniki;
     private String avtomobil;

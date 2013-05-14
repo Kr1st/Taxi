@@ -68,16 +68,28 @@ public class VpisiCenoBean {
         Object newValue = event.getNewValue();  
         
         if(newValue != null && !newValue.equals(oldValue)) {
+            
             int vrstica = event.getRowIndex();
             Narocilo narocilo = narocila.get(vrstica);
-            narocilo.setStatus(3);
             nf.edit(narocilo);
-            //narocila.remove(vrstica);
+
+            
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);  
             FacesContext.getCurrentInstance().addMessage(null, msg);  
         }  
         
     
+    }
+    
+    public void zakljuciNarocilo(){
+        try{
+            izbranoNarocilo.setStatus(3);
+            nf.edit(izbranoNarocilo);
+            narocila.remove(izbranoNarocilo);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     

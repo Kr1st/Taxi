@@ -16,22 +16,22 @@
   
                 <p:growl id="messages" showDetail="true"/>  
                 
-                <p:dataTable var="voznik" value="#{voznikiCRUD.vozniki}" id="userTable" editable="true" paginator="true" rows="10">  
+                <p:dataTable var="narocilo" value="#{narociloCRUD.narocila}" id="userTable" editable="true" paginator="true" rows="10">  
 
                     <f:facet name="header">  
                         In-Cell Editing  
                     </f:facet>  
 
-                    <p:ajax event="rowEdit" listener="#{voznikiCRUD.onEdit}" update=":form:messages" />  
-                    <p:ajax event="rowEditCancel" listener="#{voznikiCRUD.onCancel}" update=":form:messages" />  
+                    <p:ajax event="rowEdit" listener="#{narociloCRUD.onEdit}" update=":form:messages" />  
+                    <p:ajax event="rowEditCancel" listener="#{narociloCRUD.onCancel}" update=":form:messages" />  
 
                     <p:column headerText="Id" style="width:30%">  
                         <p:cellEditor>  
                             <f:facet name="output">  
-                                <h:outputText value="#{voznik.idvoznik}" />  
+                                <h:outputText value="#{narocilo.idnarocilo}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{voznik.idvoznik}" style="width:100%" readonly="true"/>  
+                                <p:inputText value="#{narocilo.idnarocilo}" style="width:100%" readonly="true"/>  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>  
@@ -39,11 +39,11 @@
                     <p:column headerText="Uporabnik" style="width:20%">  
                         <p:cellEditor>  
                             <f:facet name="output">  
-                                <h:outputText value="#{voznik.iduporabnik.ime} #{voznik.iduporabnik.priimek}" />  
+                                <h:outputText value="#{narocilo.iduporabnik.ime} #{narocilo.iduporabnik.priimek}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <h:selectOneMenu value="#{voznik.iduporabnik}" readonly="true">  
-                                    <f:selectItems value="#{voznikiCRUD.uporabniki}"  
+                                <h:selectOneMenu value="#{narocilo.iduporabnik}" >  
+                                    <f:selectItems value="#{narociloCRUD.uporabniki}"  
                                         var="uporabnik"   
                                         itemLabel="#{uporabnik.ime} #{uporabnik.priimek}"  
                                         itemValue="#{uporabnik}" />  
@@ -51,13 +51,67 @@
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
-                    <p:column headerText="Vozilo" style="width:20%">  
+                    
+                     <p:column headerText="Voznik" style="width:20%">  
                         <p:cellEditor>  
                             <f:facet name="output">  
-                                <h:outputText value="#{voznik.vozilo}" />  
+                                <h:outputText value="#{narocilo.idvoznik.iduporabnik.ime} #{narocilo.idvoznik.iduporabnik.priimek}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <p:inputText value="#{voznik.vozilo}" style="width:100%" label="Year"/>  
+                                <h:selectOneMenu value="#{narocilo.idvoznik}">  
+                                    <f:selectItems value="#{narociloCRUD.vozniki}"  
+                                        var="voznik"   
+                                        itemLabel="#{voznik.iduporabnik.ime} #{voznik.iduporabnik.priimek}"  
+                                        itemValue="#{voznik}" />  
+                                </h:selectOneMenu>
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    
+                    <p:column headerText="Datum" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{narocilo.datum}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{narocilo.datum}" style="width:100%" label="Year" readonly="true" />  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    
+                    <p:column headerText="Lokacija" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{narocilo.lokacija}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{narocilo.lokacija}" style="width:100%" label="Year" />  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    
+                    <p:column headerText="status" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{narocilo.status}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <h:selectOneMenu id="status" value="#{narocilo.status}">  
+                                    <f:selectItem itemLabel="1" itemValue="#{1}"/>
+                                    <f:selectItem itemLabel="2" itemValue="#{2}"/>
+                                    <f:selectItem itemLabel="3" itemValue="#{3}"/>
+                                </h:selectOneMenu>
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    
+                    <p:column headerText="Cena" style="width:20%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{narocilo.cena}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{narocilo.cena}" style="width:100%" label="Year" />  
                             </f:facet>  
                         </p:cellEditor>  
                     </p:column>
@@ -67,7 +121,7 @@
                         <p:rowEditor />  
                     </p:column>
                     <p:column style="width:6%">  
-                        <h:commandLink value="Izbrisi" action="#{voznikiCRUD.izbrisi(voznik)}" />
+                        <h:commandLink value="Izbrisi" action="#{narociloCRUD.delete(narocilo)}" />
                     </p:column> 
 
                 </p:dataTable>

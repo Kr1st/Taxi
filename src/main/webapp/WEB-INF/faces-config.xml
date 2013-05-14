@@ -87,4 +87,8 @@
         <converter-for-class>si.fri.sparis.taxi.entites.Uporabnik</converter-for-class>
         <converter-class>si.fri.sparis.taxi.entites.UporabnikConverter</converter-class>
     </converter>
+    <converter>
+        <converter-for-class>si.fri.sparis.taxi.entites.Voznik</converter-for-class>
+        <converter-class>si.fri.sparis.taxi.entites.VoznikConverter</converter-class>
+    </converter>
 </faces-config>
