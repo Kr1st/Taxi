@@ -61,7 +61,7 @@ public class UporabnikFacadeREST extends AbstractFacade<Uporabnik> {
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<Uporabnik> findAll() {
         return super.findAll();
     }
