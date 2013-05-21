@@ -100,6 +100,15 @@ public class Uporabnik implements Serializable {
         this.geslo = geslo;
         this.zadnjaprijava = zadnjaprijava;
     }
+    
+    public Uporabnik(int vloga, String ime, String priimek, String email, String geslo) {
+        this.vloga = vloga;
+        this.ime = ime;
+        this.priimek = priimek;
+        this.email = email;
+        this.geslo = geslo;
+        this.zadnjaprijava = new Date(new Date().getTime());
+    }
 
     public Integer getIduporabnik() {
         return iduporabnik;

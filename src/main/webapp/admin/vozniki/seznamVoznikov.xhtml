@@ -42,7 +42,7 @@
                                 <h:outputText value="#{voznik.iduporabnik.ime} #{voznik.iduporabnik.priimek}" />  
                             </f:facet>  
                             <f:facet name="input">  
-                                <h:selectOneMenu value="#{voznik.iduporabnik}" readonly="true">  
+                                <h:selectOneMenu value="#{voznik.iduporabnik}">  
                                     <f:selectItems value="#{voznikiCRUD.uporabniki}"  
                                         var="uporabnik"   
                                         itemLabel="#{uporabnik.ime} #{uporabnik.priimek}"  

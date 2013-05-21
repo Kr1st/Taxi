@@ -36,6 +36,9 @@ public class UporabnikFacadeREST extends AbstractFacade<Uporabnik> {
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Uporabnik entity) {
+        System.out.println(entity.getIme());
+        System.out.println(entity.getIduporabnik());
+        System.out.println(entity.getZadnjaprijava());
         super.create(entity);
     }
 

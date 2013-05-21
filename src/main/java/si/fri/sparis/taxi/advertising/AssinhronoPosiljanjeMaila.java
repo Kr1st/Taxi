@@ -4,8 +4,15 @@
  */
 package si.fri.sparis.taxi.advertising;
 
+import com.google.gson.Gson;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.ejb.Asynchronous;
@@ -22,6 +29,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import si.fri.sparis.taxi.entites.Uporabnik;
 import si.fri.sparis.taxi.facade.UporabnikFacade;
+import si.fri.sparis.taxi.service.client.UserRestClient;
 
 @Singleton
 @Startup
@@ -48,6 +56,7 @@ public class AssinhronoPosiljanjeMaila {
                       return new PasswordAuthentication(username, password);
               }
         });
+        //dodajUporabnika();
     }
     
     @Asynchronous
@@ -87,5 +96,6 @@ public class AssinhronoPosiljanjeMaila {
             
         }
     }
+    
     
 }

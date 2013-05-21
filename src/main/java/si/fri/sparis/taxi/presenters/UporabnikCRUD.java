@@ -4,6 +4,11 @@
  */
 package si.fri.sparis.taxi.presenters;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -132,7 +137,13 @@ public class UporabnikCRUD implements Serializable{
         uporabnik.setZadnjaprijava(new Date());
         System.out.println("datum");
         System.out.println("Pred dodajanjem");
-              
+        /*
+        try{
+            dodajUporabnikaREST(uporabnik);
+        }
+        catch(Exception e){
+        }
+        */
         
         if(!uporabnikLogika.register(uporabnik)){
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Napaka pri registraciji", "Uporabnik s takšnim naslovom že obstaja"));
@@ -212,5 +223,34 @@ public class UporabnikCRUD implements Serializable{
         System.out.println(utemp.getIduporabnik());
         setIme(utemp.getIme());
     
+    }
+    
+     public void dodajUporabnikaREST(Uporabnik u) {
+        
+        System.out.println("dodajUporabnika rest");
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+        
+        Client client = Client.create();
+ 
+        WebResource webResource = client
+           .resource("http://localhost:8080/Taxi/webresources/uporabnik");
+
+        //Uporabnik u = new Uporabnik(15, 1, "janez", "Novak", "janez.novak@mail.com", "geslo", new Date());
+        String input = gson.toJson(u);
+        //String input = "{\"vloga\":1,\"ime\":\"Janez\", \"priimek\":\"Novak\", \"email\":\"rest.test@mail.si\", \"geslo\":\"gslo\",\"zadnjaprijava\" : \"2013-05-16T14:13:18.547+02:00\"}";
+        System.out.println(input);
+        ClientResponse response = webResource.type("application/json")
+           .post(ClientResponse.class, input);
+        
+        if (response.getStatus() != 204) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                     + response.getStatus());
+        }
+        /*
+        System.out.println("Output from Server .... \n");
+        String output = response.getEntity(String.class);
+        System.out.println(output);
+        * */
+ 
     }
 }
