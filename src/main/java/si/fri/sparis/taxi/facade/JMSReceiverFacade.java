@@ -82,7 +82,7 @@ public class JMSReceiverFacade {
         return null;
     }
     
-    @Schedule(hour = "*",minute = "*",second = "*/30")
+    @Schedule(hour = "*",minute = "*",second = "*/10")
     public void writeToBase() throws JMSException{
         ObjectMessage om = this.receive();
         if (om != null){

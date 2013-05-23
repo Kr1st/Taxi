@@ -23,6 +23,7 @@ public class ResourceProducer {
         suggestions.add("Merčnikova ulica 1a");
         suggestions.add("Tivoli");
         suggestions.add("Center");
+        suggestions.add("Cirkus");
         
         return suggestions;
     }
